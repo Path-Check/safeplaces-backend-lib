@@ -9,8 +9,8 @@ class API {
     });
   }
 
-  start(port) {
-    return server.start(port);
+  start(port, bind) {
+    return server.start(port, bind);
   }
 }
 
