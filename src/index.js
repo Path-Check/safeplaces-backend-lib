@@ -4,6 +4,7 @@ class Server {
 
   constructor(config) {
     this._config = config
+    _server.setWrapAsync(this._config.wrapAsync)
   }
 
   get api() {
@@ -12,10 +13,6 @@ class Server {
 
   get router() {
     return _server
-  }
-
-  setPassport(passport) {
-    _server.setPassport(passport)
   }
 
   setupAndCreate() {
