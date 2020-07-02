@@ -42,7 +42,7 @@ class Server {
 
   start() {
     var port = this.normalizePort(this._config.port || '3000');
-    var bind = this._config.bind || '127.0.0.1'
+    var bind = this._config.bind
 
     _api.build(this._config.appFolder)
 

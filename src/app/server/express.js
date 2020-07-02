@@ -57,7 +57,7 @@ class Server {
     return this._app;
   }
 
-  start(port = 3000) {
+  start(port = 3000, bind = null) {
     if (!port) throw new Error('Port not set.');
 
     return Promise.fromCallback(cb => this._server.listen(port, cb));
