@@ -31,6 +31,7 @@ class Server {
     });
     const bodyParseEncoded = bodyParser.urlencoded({ extended: false });
 
+    this._app.disable('x-powered-by');
     this._app.use(cookieParser());
     this._app.use(expressLogger()); // Log Request
     this._app.use(bodyParseJson);
