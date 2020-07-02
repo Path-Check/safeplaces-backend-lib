@@ -42,10 +42,11 @@ class Server {
 
   start() {
     var port = this.normalizePort(this._config.port || '3000');
+    var bind = this._config.bind || '127.0.0.1'
 
     _api.build(this._config.appFolder)
 
-    _api.start(port)
+    _api.start(port, bind)
       .then(() => console.log(`Node Server Started on port ${port}!`))
   }
 }
