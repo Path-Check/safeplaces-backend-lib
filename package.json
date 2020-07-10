@@ -1,7 +1,7 @@
 {
   "name": "@pathcheck/safeplaces-server",
   "version": "0.0.13",
-  "description": "",
+  "description": "SafePlaces backend server library used to power the backend, ingest, and translation APIs",
   "main": "index.js",
   "scripts": {
     "prebuild:prod": "rm -rf dist && mkdir dist",
@@ -12,10 +12,9 @@
     "test": "nyc --reporter=html --reporter=text mocha test/**/*.* --exit",
     "test:unit": "mocha test/unit/*.* --exit",
     "test:all": "mocha test/**/*.* --exit",
-    "format": "prettier --write **/*.{js,json}"
+    "format": "prettier --write \"**/*.{js,json}\""
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bluebird": "3.7.2",
     "body-parser": "1.19.0",
