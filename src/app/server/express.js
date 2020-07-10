@@ -1,29 +1,26 @@
 const express = require('express');
 const http = require('http');
 const Promise = require('bluebird');
-const cors = require('cors');
-const boom = require('boom');
 const bodyParser = require('body-parser');
 const expressLogger = require('../logger/express');
 const errorHandler = require('./errorHandler');
 const notFoundHandler = require('./notFoundHandler');
 const responseTimeHandler = require('./responseTimeHandler');
 
-const expressSession = require('express-session');
 const cookieParser = require('cookie-parser');
 
 class Server {
   constructor() {
     this._app = express();
-    this._wrapAsync = null
+    this._wrapAsync = null;
   }
 
   setWrapAsync(fn) {
-    this._wrapAsync = fn
+    this._wrapAsync = fn;
   }
 
   setup() {
-    if (!this._wrapAsync) throw new Error('wrapAsync method is invalid.')
+    if (!this._wrapAsync) throw new Error('wrapAsync method is invalid.');
 
     const bodyParseJson = bodyParser.json({
       type: '*/*',
@@ -63,7 +60,6 @@ class Server {
 
     return Promise.fromCallback(cb => this._server.listen(port, bind, cb));
   }
-
 
   close() {
     this._server.close();
