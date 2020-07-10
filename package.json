@@ -1,6 +1,6 @@
 {
   "name": "@pathcheck/safeplaces-server",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "SafePlaces server library used to power the backend, ingest, and translation services",
   "main": "src/index.js",
   "scripts": {
