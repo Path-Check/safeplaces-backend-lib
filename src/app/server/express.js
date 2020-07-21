@@ -6,7 +6,6 @@ const expressLogger = require('../logger/express');
 const errorHandler = require('./errorHandler');
 const notFoundHandler = require('./notFoundHandler');
 const responseTimeHandler = require('./responseTimeHandler');
-
 const cookieParser = require('cookie-parser');
 
 class Server {

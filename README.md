@@ -17,14 +17,14 @@ PORT=3000
 Install by enter one of the commands below.
 
 ```
-npm install @sublet/hulk-express-server
+npm install @pathcheck/safeplaces-server
 
 -or-
 
-yarn add @sublet/hulk-express-server
+yarn add @pathcheck/safeplaces-server
 ```
 
-Once installed, create an `app.js` file at the root level 
+Once installed, create an `app.js` file at the root level and drop the following code into it.
 
 ```
 const path = require('path');
@@ -36,10 +36,7 @@ const config = {
   wrapAsync: (asyncFn, validate = false) => {
     return (req, res, next) => {
       if (validate) {
-        return enforcer
-          .handleRequest(req, res)
-          .then(() => asyncFn(req, res, next))
-          .catch(next);
+        // Do some sort of validation here.
       }
       asyncFn(req, res, next).catch(next);
     };
@@ -54,7 +51,7 @@ server.setupAndCreate();
 module.exports = server;
 ```
 
-This can then be pulled into your app and the subfunctions can be accessed.
+By placing this at the root level it can be pulled into any part of your app and utilized.
 
 #### Example of starting the server.
 
@@ -68,8 +65,23 @@ const server = require('../app');
 server.start()
 ```
 
-### App Folder
+## Options
 
-I tend to keep all of my application logic in a folder called `app`. This contains all of the Routes, Controllers, and services you need to make your app work.
+Below are the option you can pass into 
+
+- `port`: Port that you wish to use.
+- `bind`: Bind address
+- `appFolder`: Folder where your application logic exists in. (See below)
+- `wrapAsync`: method for handling async/await methods within routes.  Will also handle validation.
+
+#### App Folder
+
+We try to keep all application logic in a folder called `app`. In it, contains all of the Routes, and Controllers you need to make your app work.
+
+Within the `app` folder shoud be an `api` folder.
+
+When the server starts it will run through this `api` folder and gather all the routes.
+
+The best way to familiarize yourself with this setup is to take a look at the `sample` folder.
 
 ... More to follow.
