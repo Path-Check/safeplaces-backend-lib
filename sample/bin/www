@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+/**
+ * Environment variable validation
+ */
+require('dotenv').config()
+
+const server = require('../app');
+
+server.start()
