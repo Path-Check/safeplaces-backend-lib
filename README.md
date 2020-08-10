@@ -1,20 +1,18 @@
-# Safepaths Express Server Smple
+# SafePlaces Server Library
 
-Pre-built Express server that allows you to get up and running quickly.
-
-Under the hood this utilizes Express and Mongo to get you up and running quickly with very little setup.  Additionally I am fond of Papertrail so I use that for logging.
+The SafePlaces Server library is a pre-built Express server used across all SafePlaces services. A full example of how to integrate this library into an existing service can be found in the `sample/` directory.
 
 ## Environment Variables
 
-The config is currently pre-setup for you so all you need to do is provide the correct environment variables.
+A single environment variable is required to configure the port that the server should run on.
 
 ```
-PORT=3000
+EXPRESS_PORT=3000
 ```
 
 ## Installation and Usage
 
-Install by enter one of the commands below.
+Install with npm or yarn
 
 ```
 npm install @pathcheck/safeplaces-server
@@ -24,7 +22,7 @@ npm install @pathcheck/safeplaces-server
 yarn add @pathcheck/safeplaces-server
 ```
 
-Once installed, create an `app.js` file at the root level and drop the following code into it.
+Once installed, create an `app.js` file at the root level and add the following:
 
 ```
 const path = require('path');
@@ -49,11 +47,21 @@ const enforcer = require('./app/lib/auth');
 server.setupAndCreate();
 
 module.exports = server;
+
 ```
 
-By placing this at the root level it can be pulled into any part of your app and utilized.
+### Options
 
-#### Example of starting the server.
+The following are a list of options that can be passed to the server for further customization:
+
+- `port`: port to run the server on
+- `bind`: bind address
+- `appFolder`: folder where your application logic exists
+- `wrapAsync`: method for handling async/await methods within routes.  Will also handle validation.
+
+### Starting the server
+
+Below is example code of how to start the server (normally located in `bin/www`).
 
 ```
 #!/usr/bin/env node
@@ -65,23 +73,19 @@ const server = require('../app');
 server.start()
 ```
 
-## Options
+### Routes
 
-Below are the option you can pass into 
+Below is example code of how to add a route to the server.
 
-- `port`: Port that you wish to use.
-- `bind`: Bind address
-- `appFolder`: Folder where your application logic exists in. (See below)
-- `wrapAsync`: method for handling async/await methods within routes.  Will also handle validation.
+```
+const { router } = require('../../../app');
+const controller = require('./controller');
 
-#### App Folder
-
-We try to keep all application logic in a folder called `app`. In it, contains all of the Routes, and Controllers you need to make your app work.
-
-Within the `app` folder shoud be an `api` folder.
-
-When the server starts it will run through this `api` folder and gather all the routes.
-
-The best way to familiarize yourself with this setup is to take a look at the `sample` folder.
-
-... More to follow.
+router.post(
+  '/signup',
+  router.wrapAsync(
+    async (req, res) => await controller.signupAction(req, res),
+    true,
+  ),
+);
+```
