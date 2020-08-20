@@ -7,7 +7,7 @@ The SafePlaces Server library is a pre-built Express server used across all Safe
 A single environment variable is required to configure the port that the server should run on.
 
 ```
-EXPRESS_PORT=3000
+EXPRESSPORT=3000
 ```
 
 ## Installation and Usage
